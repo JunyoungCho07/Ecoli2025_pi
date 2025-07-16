@@ -1,0 +1,7 @@
+Pillow
+picamera2
+ultralytics
+opencv-python
+matplotlib
+numpy
+onnx-runtime

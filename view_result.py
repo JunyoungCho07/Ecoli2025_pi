@@ -59,33 +59,34 @@ import matplotlib.pyplot as plt
 import numpy as np
 import random
 
-# ✅ 모델 불러오기
-model = YOLO('C:/Users/cho-j/OneDrive/바탕 화면/Ecoli_2025/runs/exp_seg_colab3/weights/best.pt')
+# 모델 불러오기
+model_path = '/home/ecoli3/Desktop/best.onnx'
+model = YOLO(model_path)
 
-# ✅ 이미지 폴더 설정
-folder_path = 'C:/Users/cho-j/OneDrive/바탕 화면/Ecoli_2025/test_images'
+# 이미지 폴더 설정
+folder_path = '/home/ecoli3/R&E/Picture/images'
 
-# ✅ 이미지 확장자 필터
+# 이미지 확장자 필터
 valid_exts = ('.jpg', '.jpeg', '.png')
 
-# ✅ 이미지 반복 처리
+# 이미지 반복 처리
 for filename in os.listdir(folder_path):
     if filename.lower().endswith(valid_exts):
         image_path = os.path.join(folder_path, filename)
         img_bgr = cv2.imread(image_path)
 
         if img_bgr is None:
-            print(f"❌ 이미지 로드 실패: {filename}")
+            print(f"이미지 로드 실패: {filename}")
             continue
 
         img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
 
-        # ✅ 예측 수행
+        #  예측 수행
         results = model.predict(source=img_rgb, save=False, conf=0.25, imgsz=512, device='cpu')
 
         result = results[0]
 
-        # ✅ 결과 가져오기
+        #  결과 가져오기
         masks = result.masks.data.cpu().numpy() if result.masks else []
         boxes = result.boxes.xyxy.cpu().numpy() if result.boxes else []
         classes = result.boxes.cls.cpu().numpy() if result.boxes else []
@@ -93,10 +94,10 @@ for filename in os.listdir(folder_path):
         img_vis = img_rgb.copy()
         height, width = img_vis.shape[:2]
 
-        # ✅ 마스크 색상 미리 지정
+        #  마스크 색상 미리 지정
         colors = [[random.randint(100, 255) for _ in range(3)] for _ in range(len(masks))]
 
-        # ✅ 마스크 및 바운딩 박스 그리기
+        #  마스크 및 바운딩 박스 그리기
         for i, mask in enumerate(masks):
             color = colors[i]
             mask_resized = (mask > 0.5).astype(np.uint8) * 255
@@ -111,7 +112,7 @@ for filename in os.listdir(folder_path):
             cv2.rectangle(img_vis, (x1, y1), (x2, y2), color, 2)
             cv2.putText(img_vis, label, (x1, y1 - 5), cv2.FONT_HERSHEY_SIMPLEX, 0.6, color, 2)
 
-        # ✅ 시각화
+        #  시각화
         plt.figure(figsize=(10, 10))
         plt.imshow(img_vis)
         plt.title(f"Prediction: {filename}")
