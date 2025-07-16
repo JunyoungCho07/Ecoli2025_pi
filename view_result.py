@@ -61,7 +61,7 @@ import random
 
 # 모델 불러오기
 model_path = '/home/ecoli3/Desktop/best.onnx'
-model = YOLO(model_path)
+model = YOLO(model_path, task='segment')
 
 # 이미지 폴더 설정
 folder_path = '/home/ecoli3/R&E/Picture/images'
@@ -82,7 +82,7 @@ for filename in os.listdir(folder_path):
         img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
 
         #  예측 수행
-        results = model.predict(source=img_rgb, save=False, conf=0.25, imgsz=512, device='cpu')
+        results = model.predict(source=img_rgb, save=False, conf=0.25, imgsz=256, device='cpu') # change image size
 
         result = results[0]
 
