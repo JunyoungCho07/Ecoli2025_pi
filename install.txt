@@ -57,3 +57,21 @@ pip install rpi-lgpio          # <─ PyPI wheel 사용 :contentReference[oaici
 # (ecolienv) 상태에서
 pip install --upgrade pip wheel          # 최신 휠 빌더 확보(권장)
 pip install --upgrade adafruit-blinka    # board, digitalio, busio 등이 모두 포함
+
+
+
+#camera
+# Libcamera 패키지 설치
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y libcamera-apps libcamera-dev
+
+sudo nano /boot/firmware/config.txt
+# 문서 수정 (가장 아래에 추가)
+# camera_auto_detect=1
+# dtoverlay=vc4-kms-v3d
+# dtoverlay=imx708,cam0 (Pi Camera V2의 경우, 사용 중인 카메라에 맞게 변경)
+
+# Ctrl + X → Y
+sudo reboot
+cat /etc/os-release
+sudo reboot
