@@ -23,3 +23,13 @@ Traceback (most recent call last):
   File "/home/ecoli3/Desktop/Ecoli2025/ecolienv/lib/python3.11/site-packages/picamera2/__init__.py", line 4, in <module>
     import libcamera
 ModuleNotFoundError: No module named 'libcamera'
+
+
+# venv 활성화 상태
+python - <<'PY'
+import site, pathlib, sys, os
+pth = pathlib.Path(site.getsitepackages()[0]) / "_sys_dist.pth"
+with open(pth, "w") as f:
+    f.write("/usr/lib/python3/dist-packages\n")
+print("Created:", pth)
+PY
