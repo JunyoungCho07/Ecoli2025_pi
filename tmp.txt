@@ -33,3 +33,8 @@ with open(pth, "w") as f:
     f.write("/usr/lib/python3/dist-packages\n")
 print("Created:", pth)
 PY
+
+admin@raspberrypi:~ $ libcamera-hello
+[0:00:58.501052927] [1897]  INFO Camera camera_manager.cpp:326 libcamera v0.5.0+59-d83ff0a4
+Made X/EGL preview window
+ERROR: *** no cameras available ***
