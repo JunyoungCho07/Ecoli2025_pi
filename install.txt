@@ -1,0 +1,49 @@
+sudo apt install -y \
+    python3-picamera2 rpicam-apps libcamera0 libcamera-dev \
+    v4l-utils ffmpeg \
+    python3-opencv python3-numpy python3-pillow \
+    gstreamer1.0-tools gstreamer1.0-plugins-{base,good,bad,ugly}
+
+
+###
+sudo apt update && sudo apt full-upgrade -y
+
+sudo sed -i 's/dtparam=audio=on/dtparam=audio=off/' /boot/config.txt
+sudo reboot
+``` :contentReference[oaicite:1]{index=1}  
+###
+
+
+# ① 패키지‧커널 업데이트
+sudo apt update && sudo apt full-upgrade -y
+
+# ② 최신 EEPROM 펌웨어 적용
+sudo rpi-eeprom-update -a
+
+# ③ 재부팅
+sudo reboot
+
+
+###
+# 가상환경 활성화
+source ~/ecolienv/bin/activate
+
+# 2. pip 자체를 최신화 (선택)
+pip install --upgrade pip
+
+# 3. 네오픽셀 관련 패키지 설치 (sudo 사용 금지)
+pip install rpi_ws281x adafruit-circuitpython-neopixel adafruit-blinka
+
+# 기존 RPi.GPIO가 있다면 충돌 방지를 위해 제거
+pip uninstall -y RPi.GPIO
+
+# lgpio + RPi.GPIO 호환 래퍼 설치
+pip install rpi-lgpio          # <─ PyPI wheel 사용 :contentReference[oaicite:0]{index=0}
+# 또는 굳이 래퍼가 필요 없으면
+# pip install lgpio            # :contentReference[oaicite:1]{index=1}
+###
+
+
+# (ecolienv) 상태에서
+pip install --upgrade pip wheel          # 최신 휠 빌더 확보(권장)
+pip install --upgrade adafruit-blinka    # board, digitalio, busio 등이 모두 포함
