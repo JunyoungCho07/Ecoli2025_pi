@@ -1,0 +1,15 @@
+패키지 목록을 읽는 중입니다... 완료
+의존성 트리를 만드는 중입니다... 완료
+상태 정보를 읽는 중입니다... 완료        
+python3-picamera2 is already the newest version (0.3.28-1~bookworm).
+rpicam-apps is already the newest version (1.7.0-1).
+libcamera-dev is already the newest version (0.5.0+rpt20250429-1).
+몇몇 패키지를 설치할 수 없습니다. 요청한 상황이 불가능할 수도 있고,
+불안정 배포판을 사용해서 일부 필요한 패키지를 아직 만들지 않았거나,
+아직 Incoming에서 나오지 않은 경우일 수도 있습니다.
+이 상황을 해결하는데 다음 정보가 도움이 될 수도 있습니다:
+
+다음 패키지의 의존성이 맞지 않습니다:
+ libcamera-ipa : 망가뜨림: libcamera0 하지만 0~git20230720+bde9b04f-1 패키지를 설치할 것입니다
+ libcamera0.5 : 망가뜨림: libcamera0 하지만 0~git20230720+bde9b04f-1 패키지를 설치할 것입니다
+E: 문제를 바로잡을 수 없습니다. 망가진 고정 패키지가 있습니다.
