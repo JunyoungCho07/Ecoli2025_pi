@@ -1,8 +1,12 @@
 python -m pip install --upgrade pip setuptools wheel
 
 
+bash pip3 install "Adafruit-Blinka-Raspberry-Pi5-Neopixel>=1.0.0rc2"
 
-
+# CircuitPython 호환 계층(Blinka) + NeoPixel 드라이버 + DMA 라이브러리
+sudo pip3 install rpi_ws281x adafruit-circuitpython-neopixel
+sudo python3 -m pip install --force-reinstall adafruit-blinka
+``` :contentReference[oaicite:5]{index=5}
 
 sudo apt install -y \
     python3-picamera2 rpicam-apps libcamera0 libcamera-dev \
