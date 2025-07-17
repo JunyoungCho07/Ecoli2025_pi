@@ -6,6 +6,7 @@ from datetime import datetime
 from picamera2 import Picamera2
 from PIL import Image, ImageTk
 import os
+import board, neopixel, time
 
 # ── 1. 기본 설정 ───────────────────────────────────
 SAVE_DIR = "/home/ecoli3/R&E/Picture/automatic"
@@ -15,7 +16,15 @@ picam2 = Picamera2()
 picam2.configure(picam2.create_still_configuration())
 
 running = False
+# ── 1. 기본 설정 ───────────────────────────────────neopixel
+NUM_PIXELS   = 64          # LED 개수
+PIXEL_PIN    = board.D18   # 10·12·18·21 중 선택
+ORDER        = neopixel.GRB
 
+pixels = neopixel.NeoPixel(
+    PIXEL_PIN, NUM_PIXELS,
+    brightness=0.3, auto_write=False, pixel_order=ORDER
+)
 # ── 2. 캡처 스레드 ─────────────────────────────────
 def capture_loop():
     global running
@@ -25,7 +34,14 @@ def capture_loop():
         filepath = os.path.join(SAVE_DIR, filename)
 
         picam2.start();  time.sleep(2)
+        #neo pixel
+        on = (10,10,10)
+        off = (0,0,0)
+        pixels.fill(on); pixels.show()
+        time.sleep(1)
         picam2.capture_file(filepath)
+        pixels.fill(off); pixels.show()
+        time.sleep(1)
         picam2.stop()
 
         print(f"Saved ➜ {filepath}")

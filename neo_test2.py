@@ -32,12 +32,12 @@ pixels = neopixel.NeoPixel(
 #                 rc_index & 255,
 #                 255 - (rc_index & 255),
 #                 (rc_index*3) & 255
-#             )
+#             )  
 #         pixels.show()
 #         time.sleep(0.002)
 while True:
     # 빨간색 → 초록 → 파랑 → 레인보우 순환
-    on = (255,255,255)
+    on = (10,10,10)
     pixels.fill(on)
     pixels.show()
     time.sleep(1)
