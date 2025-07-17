@@ -45,7 +45,7 @@ def capture_loop():
         picam2.stop()
 
         print(f"Saved ➜ {filepath}")
-        time.sleep(20 * 60)           # 20 분 간격
+        time.sleep(5)           # 20 분 간격
 
 def START():
     global running
