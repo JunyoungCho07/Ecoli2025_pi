@@ -1,3 +1,9 @@
+python -m pip install --upgrade pip setuptools wheel
+
+
+
+
+
 sudo apt install -y \
     python3-picamera2 rpicam-apps libcamera0 libcamera-dev \
     v4l-utils ffmpeg \
