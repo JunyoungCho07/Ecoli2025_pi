@@ -38,3 +38,28 @@ admin@raspberrypi:~ $ libcamera-hello
 [0:00:58.501052927] [1897]  INFO Camera camera_manager.cpp:326 libcamera v0.5.0+59-d83ff0a4
 Made X/EGL preview window
 ERROR: *** no cameras available ***
+
+
+
+
+(venv) pi@raspberrypi:~/Desktop/Ecoli2025_pi $ python Colony_automatic.py 
+[1:11:34.077745592] [19667]  INFO Camera camera_manager.cpp:326 libcamera v0.5.0+59-d83ff0a4
+[1:11:34.084844782] [19670]  INFO RPI pisp.cpp:720 libpisp version v1.2.1 981977ff21f3 29-04-2025 (14:13:50)
+[1:11:34.095110259] [19670]  INFO RPI pisp.cpp:1179 Registered camera /base/axi/pcie@1000120000/rp1/i2c@88000/ov5647@36 to CFE device /dev/media3 and ISP device /dev/media0 using PiSP variant BCM2712_C0
+[1:11:34.099494847] [19667]  INFO Camera camera.cpp:1205 configuring streams: (0) 2592x1944-BGR888 (1) 2592x1944-GBRG_PISP_COMP1
+[1:11:34.099606885] [19670]  INFO RPI pisp.cpp:1483 Sensor: /base/axi/pcie@1000120000/rp1/i2c@88000/ov5647@36 - Selected sensor format: 2592x1944-SGBRG10_1X10 - Selected CFE format: 2592x1944-PC1g
+Traceback (most recent call last):
+  File "/home/pi/Desktop/Ecoli2025_pi/Colony_automatic.py", line 24, in <module>
+    pixels = neopixel.NeoPixel(
+             ^^^^^^^^^^^^^^^^^^
+  File "/home/pi/Desktop/Ecoli2025_pi/venv/lib/python3.11/site-packages/neopixel.py", line 138, in __init__
+    self.pin = digitalio.DigitalInOut(pin)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/digitalio.py", line 193, in __init__
+    self.direction = Direction.INPUT
+    ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/dist-packages/digitalio.py", line 223, in direction
+    self._pin.init(mode=Pin.IN)
+  File "/usr/local/lib/python3.11/dist-packages/adafruit_blinka/microcontroller/bcm283x/pin.py", line 40, in init
+    GPIO.setup(self.id, GPIO.IN)
+RuntimeError: Cannot determine SOC peripheral base address
