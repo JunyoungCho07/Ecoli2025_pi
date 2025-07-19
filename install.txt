@@ -64,6 +64,8 @@ pip install --upgrade adafruit-blinka    # board, digitalio, busio 등이 모두
 # Libcamera 패키지 설치
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y libcamera-apps libcamera-dev
+sudo apt update sudo apt install python3-pil.imagetk python3-tk
+sudo apt install -y libatlas-base-dev
 
 sudo nano /boot/firmware/config.txt
 # 문서 수정 (가장 아래에 추가)
@@ -75,3 +77,14 @@ sudo nano /boot/firmware/config.txt
 sudo reboot
 cat /etc/os-release
 sudo reboot
+
+
+python3 -m venv --system-site-packages venv     # <‑‑ 중요
+source venv/bin/activate
+
+pip install --upgrade pip setuptools wheel
+
+# 카메라 + GUI
+pip install pillow==10.* picamera2
+# LED
+pip install adafruit-blinka adafruit-circuitpython-neopixel
