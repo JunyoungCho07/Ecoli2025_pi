@@ -39,7 +39,8 @@ class CameraApp:
     def capture(self):
         if hasattr(self, 'last_frame'):
             filename = f"/home/admin/Desktop/captured/image_{int(time.time())}.png" # have to change save path
-            cv2.imwrite(filename, self.last_frame)
+            resized_frame = cv2.resize(self.last_frame,(1024,1024))
+            cv2.imwrite(filename, resized_frame)
             print(f"{filename} saved.")
 
     def __del__(self):
