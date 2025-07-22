@@ -105,3 +105,6 @@ sudo apt install gstreamer1.0-tools gstreamer1.0-libav
 #how to use
 fswebcam -r 640x480 --jpeg 85 image.jpg
 cheese
+
+#해상도 check
+v4l2-ctl --device=/dev/video0 --list-formats-ext
