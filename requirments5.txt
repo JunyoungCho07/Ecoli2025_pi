@@ -1,3 +1,4 @@
+#USB camera
 Adafruit-Blinka==8.62.0
 Adafruit-Blinka-Raspberry-Pi5-Neopixel==1.0.0rc2
 adafruit-circuitpython-busdevice==5.2.13
