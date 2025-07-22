@@ -7,45 +7,46 @@ import time
 class CameraApp:
     def __init__(self, window):
         self.window = window
-        self.window.title("USB 카메라 캡처")
+        self.window.title("USB Camera Capture")
 
-        # OpenCV 카메라 초기화
+        # Initialize OpenCV camera
         self.cap = cv2.VideoCapture(0)
         if not self.cap.isOpened():
-            raise Exception("카메라를 열 수 없습니다.")
+            raise Exception("Unable to open the camera.")
 
-        # 화면 구성
+        # Create video display area
         self.label = ttk.Label(window)
         self.label.pack()
 
-        self.capture_btn = ttk.Button(window, text="📸 캡처", command=self.capture)
+        # Create capture button
+        self.capture_btn = ttk.Button(window, text="📸 Capture", command=self.capture)
         self.capture_btn.pack(pady=10)
 
-        # 실시간 영상 업데이트
+        # Start updating live video feed
         self.update_frame()
 
     def update_frame(self):
         ret, frame = self.cap.read()
         if ret:
-            self.last_frame = frame.copy()  # 마지막 프레임 저장
+            self.last_frame = frame.copy()  # Save the last frame
             rgb_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             img = Image.fromarray(rgb_frame)
             imgtk = ImageTk.PhotoImage(image=img)
             self.label.imgtk = imgtk
             self.label.configure(image=imgtk)
-        self.window.after(10, self.update_frame)  # 10ms마다 업데이트
+        self.window.after(10, self.update_frame)  # Refresh every 10ms
 
     def capture(self):
         if hasattr(self, 'last_frame'):
             filename = f"image_{int(time.time())}.jpg"
             cv2.imwrite(filename, self.last_frame)
-            print(f"{filename} 저장됨")
+            print(f"{filename} saved.")
 
     def __del__(self):
         if self.cap.isOpened():
             self.cap.release()
 
-# 실행
+# Main program
 if __name__ == "__main__":
     root = tk.Tk()
     app = CameraApp(root)
