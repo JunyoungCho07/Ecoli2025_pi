@@ -19,7 +19,7 @@ class CameraApp:
         self.label.pack()
 
         # Create capture button
-        self.capture_btn = ttk.Button(window, text="📸 Capture", command=self.capture)
+        self.capture_btn = ttk.Button(window, text="Capture", command=self.capture)
         self.capture_btn.pack(pady=10)
 
         # Start updating live video feed
@@ -38,7 +38,7 @@ class CameraApp:
 
     def capture(self):
         if hasattr(self, 'last_frame'):
-            filename = f"image_{int(time.time())}.jpg"
+            filename = f"/home/admin/Desktop/captured/image_{int(time.time())}.png" # have to change save path
             cv2.imwrite(filename, self.last_frame)
             print(f"{filename} saved.")
 
