@@ -88,3 +88,13 @@ pip install --upgrade pip setuptools wheel
 pip install pillow==10.* picamera2
 # LED
 pip install adafruit-blinka adafruit-circuitpython-neopixel
+
+
+#USB camera installs
+sudo apt-get install fswebcam
+sudo apt-get install cheese
+sudo modprobe uvcvideo
+
+#how to use
+fswebcam -r 640x480 --jpeg 85 image.jpg
+cheese
