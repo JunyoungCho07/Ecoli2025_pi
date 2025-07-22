@@ -95,6 +95,13 @@ sudo apt-get install fswebcam
 sudo apt-get install cheese
 sudo modprobe uvcvideo
 
+#in virtual env
+pip install opencv-python numpy
+# 고급 녹화/스트리밍 용
+pip install opencv-contrib-python pyav
+# (Linux) GStreamer 백엔드 사용 시
+sudo apt install gstreamer1.0-tools gstreamer1.0-libav
+
 #how to use
 fswebcam -r 640x480 --jpeg 85 image.jpg
 cheese
