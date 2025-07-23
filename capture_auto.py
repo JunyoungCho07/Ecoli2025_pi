@@ -15,7 +15,7 @@ from datetime   import datetime
 from PIL        import Image, ImageTk
 import board, neopixel                # ⇦ NeoPixel 제어
 
-SAVE_DIR   = "/home/ecoli3/R&E/Picture/automatic"
+SAVE_DIR   = "/home/admin/Desktop/captured/auto"
 os.makedirs(SAVE_DIR, exist_ok=True)
 
 # ── 1‑A. NeoPixel -----------------------------------------------------------
@@ -48,8 +48,8 @@ def capture_loop():
         return
 
     # (원하는 해상도로 고정하려면 예: 1920x1080)
-    cap.set(cv2.CAP_PROP_FRAME_WIDTH,  1920)
-    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
+    cap.set(cv2.CAP_PROP_FRAME_WIDTH,  1024)
+    cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1024)
 
     time.sleep(2)  # 카메라 워밍업
 
@@ -63,10 +63,14 @@ def capture_loop():
         time.sleep(1)
 
         ret, frame = cap.read()
+        
+        time.sleep(1)
         pixels.fill(OFF); pixels.show()
 
         if ret:
-            cv2.imwrite(filepath, frame)
+            resized_frame = cv2.resize(frame,(1024,1024))
+            cv2.imwrite(filepath, resized_frame)
+            # cv2.imwrite(filepath, frame)
             print(f"Saved ➜ {filepath}")
         else:
             print("⚠️  frame capture 실패")
