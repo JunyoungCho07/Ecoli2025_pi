@@ -17,6 +17,7 @@ sudo apt install -y \
 
 ###
 sudo apt update && sudo apt full-upgrade -y
+sudo apt-get install libcap-dev
 
 sudo sed -i 's/dtparam=audio=on/dtparam=audio=off/' /boot/config.txt
 sudo reboot
