@@ -15,17 +15,30 @@ pixels = neopixel.NeoPixel(
     pixel_order=ORDER
 )
 
-# Function to update NeoPixel color based on slider values
+# Function to update NeoPixel color based on slider and power state
 def update_color(event=None):
-    r = red_slider.get()
-    g = green_slider.get()
-    b = blue_slider.get()
+    if power_var.get():
+        r = red_slider.get()
+        g = green_slider.get()
+        b = blue_slider.get()
+    else:
+        r, g, b = 0, 0, 0
     pixels.fill((r, g, b))
     pixels.show()
 
 # Create main window
 root = tk.Tk()
 root.title("NeoPixel RGB Controller")
+
+# Power on/off switch
+power_var = tk.BooleanVar(value=True)
+power_switch = tk.Checkbutton(
+    root,
+    text="Power",
+    variable=power_var,
+    command=update_color
+)
+power_switch.pack(pady=5)
 
 # Red slider
 red_slider = tk.Scale(
@@ -60,5 +73,10 @@ blue_slider = tk.Scale(
 )
 blue_slider.pack(fill=tk.X, padx=10, pady=5)
 
+# Initialize with default color
+def init():
+    update_color()
+
 # Start the GUI loop
+init()
 root.mainloop()
