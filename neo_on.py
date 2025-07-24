@@ -20,6 +20,6 @@ pixels = neopixel.NeoPixel(
     brightness=0.3, auto_write=False, pixel_order=ORDER
 )
 
-on = (10,10,10)
+on = (5,5,5)
 pixels.fill(on)
 pixels.show()
