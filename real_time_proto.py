@@ -7,7 +7,7 @@ from ultralytics import YOLO
 import random
 
 # YOLO 모델 로드
-model_path = '/home/ecoli3/Desktop/best.onnx'
+model_path = '/home/admin/Desktop/best.onnx'
 model = YOLO(model_path, task='detect')
 
 # TK 인터페이스 구성
@@ -77,7 +77,7 @@ def process_frame():
     video_label.configure(image=imgtk)
 
     # 다음 프레임 예약
-    root.after(10, process_frame)
+    root.after(1, process_frame)
 
 # 루프 시작
 process_frame()
