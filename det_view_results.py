@@ -6,11 +6,11 @@ import numpy as np
 import random
 
 # 1. 모델 불러오기
-model_path = '/home/ecoli3/Desktop/best.onnx'  # ONNX or PT 가능
+model_path = '/home/admin/Desktop/best.onnx'  # ONNX or PT 가능
 model = YOLO(model_path, task='detect')
 
 # 2. 이미지 폴더 설정
-folder_path = '/home/ecoli3/R&E/Picture/images'
+folder_path = '/home/admin/Pictures/Webcam'
 valid_exts = ('.jpg', '.jpeg', '.png')
 
 # 3. 이미지 반복 처리
