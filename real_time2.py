@@ -3,7 +3,7 @@ import numpy as np
 from ultralytics import YOLO
 
 # Load YOLO model (.onnx or .pt)
-model_path = '/home/ecoli3/Desktop/best.onnx'
+model_path = '/home/admin/Desktop/best.onnx'
 model = YOLO(model_path, task='detect')
 
 # Open webcam (0 is default)
