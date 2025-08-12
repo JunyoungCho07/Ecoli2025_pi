@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=My App (venv)
+Exec=bash -lc "source /home/pi/venvs/myenv/bin/activate && cd /home/pi/projects/app && python main.py"
+Icon=/home/pi/projects/icon.png
+Terminal=false
