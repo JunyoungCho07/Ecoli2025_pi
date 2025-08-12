@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Name=My App (venv)
-Exec=bash -lc "source /home/pi/venvs/myenv/bin/activate && cd /home/pi/projects/app && python main.py"
+Name=neo_off
+Exec=bash -lc "source /home/admin/ecoli/bin/activate && cd /home/admin/Desktop/Ecoli2025_pi && python neo_on.py"
 Icon=/home/pi/projects/icon.png
 Terminal=false
