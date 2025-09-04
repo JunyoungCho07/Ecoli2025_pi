@@ -36,7 +36,7 @@ if not cap.isOpened():
 
 print("[INFO] CPU에서 실시간 탐지를 시작합니다. 종료하려면 'q' 또는 ESC 키를 누르세요.")
 
-# 최근 탐지 개수를 저장하기 위한 deque 생성
+# 최근 탐지된 '콜로니' 개수를 저장하기 위한 deque 생성
 detection_counts = deque(maxlen=AVG_FRAME_COUNT)
 
 # --- 메인 루프 ---
@@ -73,10 +73,10 @@ while True:
     classes = result.boxes.cls.cpu().numpy().astype(int)
     confs = result.boxes.conf.cpu().numpy()
     
-    # 현재 프레임의 탐지 개수를 deque에 추가
-    detection_counts.append(len(boxes))
+    # 현재 프레임의 콜로니 개수를 세기 위한 변수
+    colony_count_this_frame = 0
 
-    # --- 결과 시각화 ---
+    # --- 결과 시각화 및 콜로니 카운팅 ---
     # 탐지된 객체들에 대한 반복
     for box, class_id, conf in zip(boxes, classes, confs):
         x1, y1, x2, y2 = map(int, box)
@@ -85,9 +85,14 @@ while True:
         color = CLASS_COLORS.get(class_id, (255, 255, 255))
         
         class_name = model.names[class_id]
+        
+        # 클래스가 'Colony'인 경우 카운트 증가
+        if class_name == 'Colony':
+            colony_count_this_frame += 1
+            
         label = f"{class_name} {conf:.2f}"
 
-        # 요청사항 2: 억제 구역의 넓이 계산
+        # 억제 구역의 넓이 계산
         if class_name == 'InhibitionZone':
             bbox_w = x2 - x1
             bbox_h = y2 - y1
@@ -105,8 +110,12 @@ while True:
         
         # 레이블 텍스트 그리기
         cv2.putText(resized_frame, label, (x1, y1 - 8), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255, 255, 255), 2)
+    
+    # 현재 프레임의 'Colony' 탐지 개수를 deque에 추가
+    detection_counts.append(colony_count_this_frame)
 
-    # --- 안정성 검사 및 평균 예측 데이터 표시 (수정된 부분) ---
+
+    # --- 콜로니 개수 안정성 검사 및 평균 예측 데이터 표시 ---
     avg_text = "Calculating..."
     avg_color = (0, 165, 255)  # 주황색: 계산 중
 
@@ -122,13 +131,13 @@ while True:
             
             # 최대 편차가 10% 이내이면 신뢰성 있는 결과로 판단
             if max_deviation_ratio <= 0.1:
-                avg_text = f"Stable Count: {avg_count:.2f}"
+                avg_text = f"Stable Colony Count: {avg_count:.2f}"
                 avg_color = (0, 255, 0)  # 초록색: 안정
             else:
-                avg_text = f"Unstable Count: {avg_count:.2f}"
+                avg_text = f"Unstable Colony Count: {avg_count:.2f}"
                 avg_color = (0, 0, 255)  # 빨간색: 불안정
         else:  # avg_count가 0이면 모든 값이 0이므로 안정 상태
-            avg_text = f"Stable Count: 0.00"
+            avg_text = f"Stable Colony Count: 0.00"
             avg_color = (0, 255, 0)  # 초록색: 안정
 
     cv2.putText(resized_frame, avg_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.8, avg_color, 2)
